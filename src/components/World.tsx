@@ -1,7 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 import * as THREE from 'three';
 import Globe from 'react-globe.gl';
-import DataPoints from '../../data.json'
+import clouds from '../assets/fair_clouds_4k.png';
+import globeImage from '../assets/earth-blue-marble.jpg';
+import topology from '../assets/earth-topology.png';
+import nightSky from '../assets/night-sky.png';
+import water from '../assets/earth-water.png';
+
+
+
+
+
 
 interface Label {
     lat: Number;
@@ -13,7 +22,7 @@ interface Label {
 const globeMaterial = new THREE.MeshPhongMaterial();
 globeMaterial.bumpScale = 10;
 
-new THREE.TextureLoader().load('//unpkg.com/three-globe/example/img/earth-water.png', texture => {
+new THREE.TextureLoader().load(water, texture => {
     globeMaterial.specularMap = texture;
     globeMaterial.specular = new THREE.Color('grey');
     globeMaterial.shininess = 5;
@@ -41,12 +50,10 @@ export const World = () => {
       globe.controls().autoRotate = true;
       globe.controls().autoRotateSpeed = 0.35;
 
-      // Add clouds sphere
-      const CLOUDS_IMG_URL = 'https://raw.githubusercontent.com/turban/webgl-earth/master/images/fair_clouds_4k.png';
       const CLOUDS_ALT = 0.004;
       const CLOUDS_ROTATION_SPEED = -0.010;
 
-      new THREE.TextureLoader().load(CLOUDS_IMG_URL, cloudsTexture => {
+      new THREE.TextureLoader().load(clouds, cloudsTexture => {
         const clouds = new THREE.Mesh(
           new THREE.SphereBufferGeometry(globe.getGlobeRadius() * (1 + CLOUDS_ALT), 75, 75),
           new THREE.MeshPhongMaterial({ map: cloudsTexture, transparent: true })
@@ -64,11 +71,11 @@ export const World = () => {
 
         width={width}
         height={height}
-      ref={globeEl}
-      animateIn={false}
+        ref={globeEl}
+        animateIn={false}
 
-      globeImageUrl="//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
-      bumpImageUrl="//unpkg.com/three-globe/example/img/earth-topology.png"
-      backgroundImageUrl="//unpkg.com/three-globe/example/img/night-sky.png"
+        globeImageUrl={globeImage}
+        bumpImageUrl={topology}
+        backgroundImageUrl={nightSky}
     />;
   };
