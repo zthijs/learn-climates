@@ -1,0 +1,22 @@
+*::-webkit-scrollbar {
+  width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #555; 
+}
+ 
+*::-webkit-scrollbar-thumb {
+  background: rgb(167, 167, 167); 
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: rgb(167, 167, 167);  
+}
+
+select option {
+  margin: 40px;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: #fff;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+}
