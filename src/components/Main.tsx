@@ -1,11 +1,14 @@
 import { World } from "./World";
-import { Box, Flex, Heading, Select, Spacer, Text } from '@chakra-ui/react'
+import { Box, Flex, Heading, Select, Spacer, Text, useBreakpointValue } from '@chakra-ui/react'
 import Videos from "./Videos";
 import Assignments from "./Assignments";
+import ClimateModal from "./ClimateModal";
+import Climates from "./Climates";
+
 
 export default function Main (){
     return(
-        <Flex w={"100vw"}>
+        <Flex direction={useBreakpointValue({base : "column" , md : "row"})} w={"100vw"}>
             <Box cursor={"grab"} onDragStart={()=>console.log('yeet')} bg='black'>
                 <World />
             </Box>
@@ -13,6 +16,7 @@ export default function Main (){
                 <Heading>
                     Welcome
                 </Heading>
+                
                 <Text my={5}>
                     The earth has all different kinds of weather. It can be really cold but it also can be really warm. Why is it that we have these differences? We have these differences because of climates. The earth has three main climates; the <strong>tropical</strong> climate, the <strong>temperate</strong> climate and the <strong>polar</strong>  climate. Each of these climates have their own characteristics. On this website you will find out what characteristics each climate has and why they have them.
                 </Text>
@@ -21,6 +25,7 @@ export default function Main (){
                 </Text>
 
                 <Videos/>
+                <Climates/>
                 <Assignments/>
             </Box>
             

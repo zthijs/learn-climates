@@ -2,15 +2,12 @@ import { useEffect, useRef, useState } from "react";
 import * as THREE from 'three';
 import Globe from 'react-globe.gl';
 import clouds from '../assets/fair_clouds_4k.png';
+import lines from '../assets/lines-blue.png';
+
 import globeImage from '../assets/earth-blue-marble.jpg';
 import topology from '../assets/earth-topology.png';
 import nightSky from '../assets/night-sky.png';
 import water from '../assets/earth-water.png';
-
-
-
-
-
 
 interface Label {
     lat: Number;
@@ -34,7 +31,7 @@ export const World = () => {
     const [width, setWidth] = useState(((window.innerWidth) / 3) * 2);
     const [height, setHeight] = useState(window.innerHeight);
 
-
+    const shieldRing = { lat: 0, lng: 0 };
     useEffect(() => {
         window.addEventListener('resize', () => {
             setWidth(((window.innerWidth) / 3) * 2);
@@ -51,7 +48,7 @@ export const World = () => {
       globe.controls().autoRotateSpeed = 0.35;
 
       const CLOUDS_ALT = 0.004;
-      const CLOUDS_ROTATION_SPEED = -0.010;
+      const CLOUDS_ROTATION_SPEED = -0.008;
 
       new THREE.TextureLoader().load(clouds, cloudsTexture => {
         const clouds = new THREE.Mesh(
@@ -65,10 +62,23 @@ export const World = () => {
           requestAnimationFrame(rotateClouds);
         })();
       });
+
+      new THREE.TextureLoader().load(lines, cloudsTexture => {
+        const lineLayer = new THREE.Mesh(
+          new THREE.SphereBufferGeometry(globe.getGlobeRadius() * (1 + 0.02), 75, 75),
+          new THREE.MeshPhongMaterial({ map: cloudsTexture, transparent: true , side: THREE.DoubleSide})
+        );
+        globe.scene().add(lineLayer);
+
+        (function rotateClouds() {
+          lineLayer.rotation.y += -0.05 * Math.PI / 180;
+          requestAnimationFrame(rotateClouds);
+        })();
+        
+      });
     }, []);
 
     return <Globe
-
         width={width}
         height={height}
         ref={globeEl}
@@ -77,5 +87,6 @@ export const World = () => {
         globeImageUrl={globeImage}
         bumpImageUrl={topology}
         backgroundImageUrl={nightSky}
+
     />;
   };
