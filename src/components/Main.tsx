@@ -1,9 +1,10 @@
 import { World } from "./World";
-import { Box, Flex, Heading, Select, Spacer, Text, useBreakpointValue } from '@chakra-ui/react'
+import { Box, Center, Flex, Heading, Select, Spacer, Text, useBreakpointValue } from '@chakra-ui/react'
 import Videos from "./Videos";
 import Assignments from "./Assignments";
 import ClimateModal from "./ClimateModal";
 import Climates from "./Climates";
+import Quiz from "./Quiz";
 
 
 export default function Main (){
@@ -26,7 +27,10 @@ export default function Main (){
 
                 <Videos/>
                 <Climates/>
-                <Assignments/>
+                <Quiz/>
+                <Center mt={10}>
+                ©2022 - Anneroos, Florance, Jordy
+                </Center>
             </Box>
             
         </Flex>
