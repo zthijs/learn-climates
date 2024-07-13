@@ -3,15 +3,15 @@
 }
 
 *::-webkit-scrollbar-track {
-  background: #555; 
+  background: #555;
 }
- 
+
 *::-webkit-scrollbar-thumb {
-  background: rgb(167, 167, 167); 
+  background: rgb(167, 167, 167);
 }
 
 *::-webkit-scrollbar-thumb:hover {
-  background: rgb(167, 167, 167);  
+  background: rgb(167, 167, 167);
 }
 
 select option {
